@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Mohammed Abdullah Portfolio</title>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+/* Global Reset and Base */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth; 
+}
+
+html{
+    font-size: 62.5%; /* 1rem = 10px */
+}
+
+body{
+    background-color: black; 
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Accent Color Definition (Blue) */
+:root {
+    --main-color: #00aaff; 
+    --text-color: white;
+    --bg-color: black;
+    --secondary-bg-color: #111111; 
+    --glass-bg: rgba(0, 170, 255, 0.05); /* خلفية زجاجية شفافة جدًا */
+    --glass-border: rgba(0, 170, 255, 0.3); /* حدود زجاجية */
+}
+
+/* ---------------------------------- */
+/* Header & Navigation (Glassmorphism) */
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* Header & Navigation (Glassmorphism) */
+/* ---------------------------------- */
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%; 
+    
+    /* التعديل: إزالة الـ Glassmorphism من الـ Header وجعله شفافًا */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: none;
+    box-shadow: none;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo{
+    font-size: 3rem;
+    color: var(--text-color); 
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.logo span {
+    color: var(--main-color);
+}
+
+/* إضافة التنسيق البيضاوي العائم لـ Navbar */
+.navbar{
+    position: absolute; /* لجعلها عائمة في المنتصف */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 4rem; /* مساحة داخلية جيدة */
+    border-radius: 4rem; /* لجعل الحواف بيضاوية (Capsule) */
+    
+    /* تطبيق تأثير Glassmorphism */
+    background: var(--glass-bg); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border); 
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    z-index: 100; /* قيمة عالية لتكون فوق المحتوى */
+}
+
+/* تعديل .navbar a */
+.navbar a{
+    font-size: 1.7rem;
+    color: var(--text-color);
+    margin: 0 1.5rem; /* تعديل الهامش الأفقي */
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding-bottom: 0; /* إزالة البادينج السفلي القديم */
+    z-index: 20; /* لجعل الروابط فوق المؤشر */
+    position: relative; 
+}
+
+/* إلغاء التنسيق القديم للـ hover/active وإضافة تأثير اللون فقط */
+.navbar a:hover,
+.navbar a.active{
+    color: var(--main-color);
+    border-bottom: none; /* مهم لإلغاء الخط السفلي */
+}
+
+/* إضافة تنسيق المؤشر المتحرك (الطبقة الشفافة) */
+.navbar .active-indicator {
+    position: absolute;
+    height: 100%; /* ارتفاع المؤشر بنفس ارتفاع الـ navbar */
+    width: 0; /* العرض سيتحدد بالـ JavaScript */
+    background-color: var(--main-color);
+    border-radius: 4rem; /* نفس حواف الـ navbar */
+    opacity: 0.1; /* لجعلها شفافة قليلاً */
+    /* انيميشن احترافي لحركة المؤشر */
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+    z-index: 1; /* ليكون خلف الروابط */
+}
+
+#menu-icon {
+    font-size: 3.6rem;
+    color: var(--main-color);
+    cursor: pointer;
+    display: none; /* إخفاء أيقونة الهامبرغر افتراضياً */
+}
+
+/* Sections General Styling */
+section{
+    min-height: 100vh;
+    padding: 10rem 9% 2rem;
+    background-color: var(--bg-color);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 4.5rem;
+    margin-bottom: 3rem;
+    font-weight: 700;
+}
+
+.section-title span {
+    color: var(--main-color);
+}
+
+.section-description {
+    text-align: center;
+    font-size: 1.8rem;
+    max-width: 800px;
+    margin: 0 auto 5rem;
+    font-weight: 300;
+}
+
+/* Reusable Elements - Buttons */
+.btn{
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background-color: var(--main-color);
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    color: var(--bg-color); 
+    font-weight: 600;
+    border: 2px solid var(--main-color);
+    transition: 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.btn:hover{
+    background-color: var(--bg-color);
+    color: var(--main-color);
+    box-shadow: 0 0 1.5rem var(--main-color);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--main-color);
+    margin-left: 2rem;
+}
+
+.secondary-btn:hover {
+    background-color: var(--main-color);
+    color: var(--bg-color);
+}
+
+/* Social Icons */
+.social-icons a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background-color: transparent;
+    border: 0.2rem solid var(--main-color); 
+    font-size: 2rem;
+    border-radius: 50%;
+    margin-right: 1.5rem;
+    transition: 0.3s ease;
+    color: var(--main-color);
+}
+
+.social-icons a:hover{
+    color: var(--bg-color);
+    transform: scale(1.1);
+    background-color: var(--main-color);
+    box-shadow: 0  0 1rem var(--main-color); 
+}
+
+/* 1. Home Section Styling (Kept as is) */
+.home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.home-content {
+    max-width: 800px;
+}
+
+.home-content .greeting{
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* تم تصغير حجم خط المسترة هنا */
+.home-content h3{
+    font-size: 2.5rem; 
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.home-content p{
+    font-size: 1.8rem;
+    margin-bottom: 4rem;
+    font-weight: 300;
+}
+
+.typing-text span::before{
+    content: "Web Developer"; 
+    color: var(--main-color); 
+    animation: words 20s infinite;
+}
+
+.typing-text span::after{
+    content: "";
+    background-color: var(--bg-color);
+    position: absolute;
+    width: calc(100% + 8px);
+    height: 6%;
+    border-left: 3px solid var(--bg-color);
+    right: -8;
+    animation: cursor 0.6s infinite;
+}
+
+@keyframes cursor{
+    to{
+        border-left: 3px solid var(--main-color); 
+    }
+}
+
+@keyframes words{
+    0%, 30%{
+        content: "Graphic Designer (Canva)";
+    }
+    31%, 60%{
+        content: "Web Developer (HTML/CSS/JS)";
+    }
+    61%, 90%{
+        content: "AI-Focused Developer";
+    }
+    91%, 100%{
+        content: "Creative Problem Solver";
+    }
+}
+
+/* ---------------------------------- */
+/* 2. About Section (Glassmorphism) */
+/* ---------------------------------- */
+.about-glass-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto 5rem;
+    padding: 3rem;
+    font-size: 1.6rem;
+    
+    /* Glassmorphism styles for the main box */
+    background: rgba(0, 170, 255, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+}
+
+.programmer-icon {
+    flex-shrink: 0;
+}
+
+.programmer-icon i {
+    font-size: 8rem;
+    color: var(--main-color);
+}
+
+.about-summary h3 {
+    font-size: 3rem;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+}
+
+.about-summary p {
+    font-size: 1.8rem;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* Personal Information Title */
+.personal-info-title {
+    font-size: 3rem;
+    color: var(--main-color);
+    text-align: center;
+    margin-bottom: 3rem;
+    font-weight: 600;
+}
+
+/* Personal Information Grid (Glass Items) */
+.personal-info-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.info-item.glass-item {
+    min-width: 250px;
+    flex-basis: 45%; /* لكي تأخذ كل اثنتين مساحة جيدة بجانب بعضهما */
+    padding: 2rem;
+    
+    /* Glassmorphism styles for small items */
+    background: rgba(0, 170, 255, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+}
+
+.info-item.glass-item span {
+    display: block;
+    font-size: 1.8rem;
+    color: var(--main-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.info-item.glass-item span i {
+    margin-right: 0.8rem;
+}
+
+.info-item.glass-item p {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    margin-left: 2.5rem;
+}
+
+/* 3. Skills Section Styling (Card Layout) */
+.skills-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skill-card {
+    background-color: var(--secondary-bg-color);
+    padding: 3rem;
+    border-radius: 1rem;
+    max-width: 350px;
+    text-align: center;
+    transition: 0.4s;
+    border-bottom: 4px solid var(--main-color); 
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+}
+
+.skill-card i {
+    font-size: 4rem;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+}
+
+.skill-card h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.skill-card p {
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+
+
+/* 4. Experience & 5. Education Timeline Styling */
+.timeline-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 3rem;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: var(--main-color);
+    top: 0;
+    bottom: 0;
+    left: 20px; 
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 1rem 0;
+    position: relative;
+    padding-left: 4rem;
+    margin-bottom: 4rem;
+    background-color: var(--secondary-bg-color);
+    border-radius: 0.5rem;
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--main-color);
+    border: 3px solid var(--bg-color); 
+    border-radius: 50%;
+    left: 15px; 
+    top: 1.5rem;
+}
+
+.timeline-date {
+    font-size: 1.4rem;
+    color: var(--main-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content h3 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content p, .timeline-content ul {
+    font-size: 1.6rem;
+    color: white;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.timeline-content ul {
+    padding-left: 2rem;
+    list-style-type: disc;
+}
+.timeline-content ul li {
+    list-style: disc;
+    margin-bottom: 0.5rem;
+    padding-left: 0;
+}
+.timeline-content ul li::before {
+    content: none;
+}
+
+
+/* 6. Contact Section Styling */
+#contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.contact-details {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.contact-item {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--secondary-bg-color); 
+    border-radius: 0.5rem;
+    min-width: 200px;
+    flex-grow: 1;
+}
+
+.contact-item i {
+    font-size: 3rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.contact-item h4 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.contact-item p, .contact-item a {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 300;
+}
+.contact-item a:hover {
+    color: var(--main-color);
+}
+
+
+/* Media Queries for Responsiveness (Hamburger Menu) */
+@media(max-width:1200px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media(max-width:768px) {
+    
+    /* Show Hamburger Menu */
+    #menu-icon {
+        display: block; 
+    }
+    
+    /* Styling for Mobile Navigation */
+    .navbar {
+        /* الغاء التنسيق البيضاوي والتحريك في وضع الجوال */
+        position: absolute; /* يبدأ بعد الهيدر */
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        transform: translateX(0); /* إلغاء التحريك الأفقي */
+        
+        /* تطبيق تنسيق قائمة الجوال */
+        padding: 1rem 3%;
+        background: rgba(0, 170, 255, 0.1); 
+        backdrop-filter: blur(10px); 
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+        border: none; /* إزالة الحد البيضاوي */
+        border-radius: 0; /* إزالة الشكل البيضاوي */
+        
+        display: none; 
+        flex-direction: column; /* لترتيب الروابط عموديًا */
+        align-items: flex-start; /* لمحاذاة الروابط لليسار */
+        transition: 0.3s ease-in-out;
+    }
+
+    .navbar.active {
+        display: flex; /* إظهاره عند الضغط على الهامبرغر */
+    }
+
+    .navbar a {
+        display: block;
+        margin: 1rem 0; /* تعديل الهامش للجوال */
+        font-size: 2rem;
+        text-align: left; /* لمحاذاة الروابط لليسار */
+        /* إزالة خطوط الحدود وتكبير حجم الخط قليلا */
+        border-bottom: none; 
+    }
+    
+    /* إخفاء المؤشر المتحرك في وضع الجوال */
+    .navbar .active-indicator {
+        display: none !important;
+    }
+
+    .home-content .greeting {
+        font-size: 5rem;
+    }
+    .home-content h3 {
+        font-size: 2.2rem;
+    }
+}
+    </style>
+    <header>
+        <a href="#home" class="logo">M<span>A</span></a> 
+        
+        <i class="fa-solid fa-bars" id="menu-icon"></i> 
+
+       <nav class="navbar">
+    <a href="#home" class="active"> Home</a>
+    <a href="#about" >About</a>
+    <a href="#skills" >Skills</a>
+    <a href="#experience" >Experience</a>
+    <a href="#education" >Education</a>
+    <a href="#contact" >Contact</a>
+    <span class="active-indicator"></span> 
+</nav>
+    </header>
+    
+    <section class="home" id="home">
+        <div class="home-content">
+            <h1 class="greeting">Hi, I'm <span>Mohammed Abdullah</span></h1>
+            <h3 class="typing-text">Specialized in <span></span></h3>
+            <p>Creative and motivated Graphic Designer specialized in Canva, and Web Developer experienced in building functional and responsive websites using Google Sites and HTML, CSS, JavaScript. Passionate about leveraging AI tools to improve design, productivity, and user experience.</p>
+            <div class="home-buttons">
+                <a href="#experience" class="btn">View My Work</a>
+                <a href="#contact" class="btn secondary-btn">Contact Me</a>
+            </div>
+        </div>
+        </section>
+
+    <section id="about">
+        <h2 class="section-title">About <span>Me</span></h2>
+        
+        <div class="about-glass-container">
+            <div class="programmer-icon">
+                <i class="fa-solid fa-laptop-code"></i> 
+            </div>
+            <div class="about-summary">
+                <h3>Creative Designer & Developer</h3>
+                <p>Hello, I'm Mohammed Abdullah, a dedicated Developer & Graphic Designer with 3+ years of experience crafting fast, functional, and visually appealing digital experiences that blend functionality with creativity. I focus on building responsive websites and unique designs centered on performance, usability, and delivering real value for clients.</p>
+            </div>
+        </div>
+        
+        <h3 class="personal-info-title">Personal Information</h3>
+        <div class="personal-info-grid">
+            
+            <div class="info-item glass-item">
+                <span><i class="fa-solid fa-user"></i> Name:</span> 
+                <p>Mohammed Abdullah</p>
+            </div>
+            
+            <div class="info-item glass-item">
+                <span><i class="fa-solid fa-envelope"></i> Email:</span> 
+                <p>mohammedeyad1114@gmail.com</p>
+            </div>
+            
+            <div class="info-item glass-item">
+                <span><i class="fa-solid fa-location-dot"></i> Location:</span> 
+                <p>Alexandria, Egypt</p>
+            </div>
+            
+            <div class="info-item glass-item">
+                <span><i class="fa-solid fa-briefcase"></i> Status:</span> 
+                <p>Open to opportunities</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">My <span>Skills</span></h2>
+        <div class="section-description">My expertise bridges design and development — from creating captivating visuals to building fast, secure, and responsive digital experiences.</div>
+        
+        <div class="skills-container">
+            <div class="skill-card">
+                <i class="fa-solid fa-paintbrush"></i>
+                <h3>Graphic Designer</h3>
+                <p>Creating visually balanced designs that express brand identity with clarity and purpose. Skilled in layout composition, color palettes, typography choices, and crafting consistent visuals across different platforms (Canva).</p>
+            </div>
+            
+            <div class="skill-card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Web Developer</h3>
+                <p>Creating clean and responsive websites (Google Sites, HTML/CSS/JS) with a clear layout and user flow. Focused on integrating simple custom themes and optimizing performance for smooth interaction and usability.</p>
+            </div>
+            
+            <div class="skill-card">
+                <i class="fa-solid fa-robot"></i>
+                <h3>AI & Tech Integration</h3>
+                <p>Applying AI tools to enhance creativity, design quality, and coding efficiency. Experienced in basic programming instruction (Scratch, Python basics, Arduino) for educational purposes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">My <span>Experience</span></h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2023 - Present</div>
+                <div class="timeline-content">
+                    <h3>Freelance | Graphic Designer & Web Developer</h3>
+                    <ul>
+                        <li>Designed logos, posters, and social media content using Canva.</li>
+                        <li>Built websites with Google Sites for educational and personal projects.</li>
+                        <li>Developed simple responsive websites using HTML, CSS, JavaScript.</li>
+                        <li>Applied AI tools to enhance creativity, design quality, and coding efficiency.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2024 - 2025</div>
+                <div class="timeline-content">
+                    <h3>Former Manager of an Educational Startup</h3>
+                    <ul>
+                        <li>Managed a startup focused on teaching programming and robotics for teenagers.</li>
+                        <li>Built and maintained the official company website using Google Sites.</li>
+                        <li>Supervised training courses and taught programming (Scratch, Python basics, Arduino).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2025 - Present</div>
+                <div class="timeline-content">
+                    <h3>Graphic Designer | The Multiverse of Harry Potter Platform</h3>
+                    <ul>
+                        <li>Designed posters, visuals, and creative content for Harry Potter fans.</li>
+                        <li>Contributed to building attractive designs supporting the platform's visual identity.</li>
+                        <li>Collaborated with a multidisciplinary team to develop tailored content.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2 class="section-title">My <span>Education</span></h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2025 - Present</div>
+                <div class="timeline-content">
+                    <h3>Student - Grade 8 (Second Preparatory)</h3>
+                    <p>New Republic School, Alexandria, Egypt</p>
+                    <ul>
+                        <li>Special interest in Web Development, Graphic Design, and Artificial Intelligence.</li>
+                        <li>Completed multiple self-learning projects in programming, website design, and AI tools.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h2 class="section-title">Let's <span>Connect</span></h2>
+        <div class="section-description">Have a project in mind or want to discuss opportunities? I'm always open to talking about creative ideas and new projects.</div>
+
+        <div class="contact-container">
+            <div class="contact-details">
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h4>Location</h4>
+                    <p>Alexandria, Egypt</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p><a href="mailto:mohammedeyad1114@gmail.com">mohammedeyad1114@gmail.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <h4>Phone / WhatsApp</h4>
+                    <p>+20 1279929897</p>
+                </div>
+            </div>
+            
+            <a href="#" class="btn" style="margin-top: 3rem;">Start a Project</a>
+
+            <div class="social-icons" style="margin-top: 3rem;">
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const menuIcon = document.querySelector('#menu-icon');
+        const navbar = document.querySelector('.navbar');
+
+        menuIcon.onclick = () => {
+            navbar.classList.toggle('active');
+        };
+
+        // Close navbar when a link is clicked (for single page navigation)
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.onclick = () => {
+                navbar.classList.remove('active');
+            };
+        });
+    </script>
+</body>
+</html>
